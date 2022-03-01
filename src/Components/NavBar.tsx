@@ -16,7 +16,7 @@ const NavBar = () => {
                 <a href="">Music</a>
             </div>
             <div>
-                <a href="#">Settings</a>
+                <a href="">Settings</a>
             </div>
             <div>
                 <a href="">Favorites</a>
