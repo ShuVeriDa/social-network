@@ -18,6 +18,9 @@ const NavBar = () => {
             <div>
                 <a href="">Settings</a>
             </div>
+            <div>
+                <a href="">Favorites</a>
+            </div>
         </nav>
     );
 };
