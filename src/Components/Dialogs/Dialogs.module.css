@@ -7,12 +7,9 @@
     padding: 10px;
 }
 
-.dialogsItems .active {
-    color: gold;
-}
-
-.dialog {
-
+.dialog a{
+    color: #fff;
+    text-decoration: none;
 }
 
 .messages {
@@ -21,6 +18,10 @@
 
 .messages .message {
 
+}
+.active {
+    color: gold;
+    text-decoration: none;
 }
 
 
