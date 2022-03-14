@@ -10,11 +10,11 @@ type myPostsType = {
 
 const MyPosts = () => {
 
-   let postData: Array<myPostsType> = [
+   const posts: Array<myPostsType> = [
       {id: 1, message: "Hi, how are you?", likesCount: 10},
       {id: 2, message: "It is my friend", likesCount: 13},
-
    ]
+   const postsElement = posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />)
 
    return (
       <div className={classes.postsBlock}>
@@ -28,8 +28,7 @@ const MyPosts = () => {
           </div>
          </div>
          <div className={classes.posts}>
-            <Post message={postData[0].message} likesCount={postData[1].likesCount}/>
-            <Post message={postData[1].message} likesCount={postData[1].likesCount}/>
+            {postsElement}
          </div>
       </div>
    );

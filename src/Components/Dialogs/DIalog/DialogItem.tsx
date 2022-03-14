@@ -7,7 +7,7 @@ type DialogType = {
    id: number
 }
 
-export const Dialog: FC<DialogType> = ({name, id}) => {
+export const DialogItem: FC<DialogType> = ({name, id}) => {
    let path = "/dialogs/" + id
    return (
       <div>
