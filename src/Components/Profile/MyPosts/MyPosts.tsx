@@ -2,20 +2,37 @@ import React from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
+type myPostsType = {
+   id: number
+   message: string
+   likesCount: number
+}
+
 const MyPosts = () => {
-    return (
-        <div>
-            My posts
+
+   let postData: Array<myPostsType> = [
+      {id: 1, message: "Hi, how are you?", likesCount: 10},
+      {id: 2, message: "It is my friend", likesCount: 13},
+
+   ]
+
+   return (
+      <div className={classes.postsBlock}>
+         My posts
+         <div>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
+               <textarea></textarea>
             </div>
-            <div className={classes.posts}>
-                <Post message='Hi, how are you' like={5}/>
-                <Post message='It is my friend' like={15}/>
-            </div>
-        </div>
-    );
+          <div>
+             <button>AddPost</button>
+          </div>
+         </div>
+         <div className={classes.posts}>
+            <Post message={postData[0].message} likesCount={postData[1].likesCount}/>
+            <Post message={postData[1].message} likesCount={postData[1].likesCount}/>
+         </div>
+      </div>
+   );
 };
 
 export {MyPosts};
