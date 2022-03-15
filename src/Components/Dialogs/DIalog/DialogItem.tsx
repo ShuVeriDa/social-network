@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import classes from "../Dialogs.module.css";
+import classes from "./DialogItem.module.css";
 import {NavLink} from "react-router-dom";
 
 type DialogType = {
