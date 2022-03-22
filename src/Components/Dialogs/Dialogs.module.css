@@ -20,5 +20,10 @@
     text-decoration: none;
 }
 
+.NewMessages {
+    display: flex;
+    background: green;
+}
+
 
 

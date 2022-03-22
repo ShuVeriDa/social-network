@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import state, {StateType} from './redux/state'
+import {addPost} from "./redux/state";
 
 export type IndexType = {
    state: StateType

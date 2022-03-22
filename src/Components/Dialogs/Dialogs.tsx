@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC, RefObject} from 'react';
 import classes from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 import {DialogItem} from "./DIalog/DialogItem";
