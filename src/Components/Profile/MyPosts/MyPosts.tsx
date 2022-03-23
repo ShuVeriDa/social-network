@@ -15,7 +15,7 @@ const MyPosts = (props: MyPostsType) => {
    const addPost = () => {
       if (newPostElement.current) {
          props.addPost(newPostElement.current.value)
-         console.log( props.addPost)
+         newPostElement.current.value = ''
       }
    }
 
