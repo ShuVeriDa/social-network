@@ -10,13 +10,14 @@ import App, {AppType} from "../../App";
 // }
 type ProfileType = {
    state: ProfilePageType
+   addPost: (postMessage: string) => void
 }
 
-const Profile: FC<ProfileType> = ({state}) => {
+const Profile: FC<ProfileType> = ({state, ...props}) => {
    return (
       <div className={classes.content}>
          <ProfilelInfo/>
-         <MyPosts posts={state.posts}/>
+         <MyPosts posts={state.posts} addPost={props.addPost}/>
       </div>
    );
 };

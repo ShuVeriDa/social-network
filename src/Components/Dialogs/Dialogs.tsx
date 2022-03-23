@@ -8,6 +8,7 @@ import { DialogsPageType} from "../../redux/state";
 
 type DialogsType = {
    state: DialogsPageType
+
 }
 
 export const Dialogs: FC<DialogsType> = ({state}) => {
