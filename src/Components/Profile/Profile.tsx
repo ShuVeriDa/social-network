@@ -9,15 +9,20 @@ import App, {AppType} from "../../App";
 //    posts: Array<PostsType>
 // }
 type ProfileType = {
-   state: ProfilePageType
-   addPost: (postMessage: string) => void
+   profilePage: ProfilePageType
+   addPost: () => void
+   updateNewPostText: (newPost: string) => void
 }
 
-const Profile: FC<ProfileType> = ({state, ...props}) => {
+const Profile: FC<ProfileType> = ({profilePage, ...props}) => {
    return (
       <div className={classes.content}>
          <ProfilelInfo/>
-         <MyPosts posts={state.posts} addPost={props.addPost}/>
+         <MyPosts posts={profilePage.posts}
+                  newPostText={profilePage.newPostText}
+                  addPost={props.addPost}
+                  updateNewPostText={props.updateNewPostText}
+         />
       </div>
    );
 };
