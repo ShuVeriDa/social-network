@@ -5,7 +5,7 @@ import {PostsType} from "../../../redux/state";
 
 type MyPostsType = {
    posts: Array<PostsType>
-   addPost: () => void
+   addPost: (postText: string) => void
    newPostText: string
    updateNewPostText: (newPost: string) => void
 }
@@ -15,7 +15,7 @@ const MyPosts = (props: MyPostsType) => {
 
    const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
    const addPost = () => {
-         props.addPost()
+         props.addPost(props.newPostText)
    }
 
    const onPostChange = () => {

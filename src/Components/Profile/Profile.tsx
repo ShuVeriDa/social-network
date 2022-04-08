@@ -10,7 +10,7 @@ import App, {AppType} from "../../App";
 // }
 type ProfileType = {
    profilePage: ProfilePageType
-   addPost: () => void
+   addPost: (postText: string) => void
    updateNewPostText: (newPost: string) => void
 }
 

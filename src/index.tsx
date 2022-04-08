@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import state from './redux/state'
-import {rerenderTree} from "./render";
 
-rerenderTree(state)
+import store from "./redux/state";
+import {rerenderEntireTree} from "./render";
+
+
+store.subscribe(rerenderEntireTree)
+rerenderEntireTree()
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
