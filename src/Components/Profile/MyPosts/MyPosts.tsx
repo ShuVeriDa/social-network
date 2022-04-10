@@ -1,7 +1,7 @@
 import React, {RefObject} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ActionsTypes, PostsType} from "../../../redux/state";
+import {ActionsTypes, addPostAC, PostsType} from "../../../redux/state";
 
 type MyPostsType = {
    posts: Array<PostsType>
@@ -14,7 +14,7 @@ const MyPosts = (props: MyPostsType) => {
 
    const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
    const addPost = () => {
-      props.dispatch({type: 'ADD-POST', postText: props.newPostText})
+      props.dispatch(addPostAC(props.newPostText))
    }
 
    const onPostChange = () => {
