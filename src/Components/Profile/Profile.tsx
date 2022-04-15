@@ -9,14 +9,14 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ReducersType} from "../../redux/redux-store";
 
 type ProfileType = {
-   store: ReducersType
+
 }
 
 const Profile: FC<ProfileType> = ({ ...props}) => {
    return (
       <div className={classes.content}>
          <ProfilelInfo/>
-         <MyPostsContainer store={props.store}/>
+         <MyPostsContainer />
       </div>
    );
 };
