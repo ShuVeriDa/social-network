@@ -1,3 +1,7 @@
+import {addPostAC, changeNewTextAC, profileReducer} from "./profileReducer";
+import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogsReducer";
+import {sidebarReducer} from "./sidebarReducer";
+
 export type PostsType = {
    id: number
    message: string
@@ -18,10 +22,13 @@ export type ProfilePageType = {
 export type DialogsPageType = {
    messages: Array<MessagesDataType>
    dialogs: Array<DialogsDataType>
+   newMessageBody: string
 }
+export type SidebarType = {}
 export type StateType = {
    profilePage: ProfilePageType
    dialogsPage: DialogsPageType
+   sidebar: SidebarType
 }
 export type StoreType = {
    _state: StateType
@@ -30,24 +37,7 @@ export type StoreType = {
    getState: () => StateType
    dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>
-
-const ADD_POST = 'ADD-POST'
-const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT"
-
-export const addPostAC = (postText: string) => {
-   return {
-      type: ADD_POST,
-      postText: postText
-   } as const
-}
-
-export const changeNewTextAC = (newText: string) => {
-   return {
-      type: CHANGE_NEW_TEXT,
-      newText: newText
-   } as const
-}
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC> | ReturnType<typeof updateNewMessageBodyAC> | ReturnType<typeof sendMessageAC>
 
 const store: StoreType = {
    _state: {
@@ -71,7 +61,9 @@ const store: StoreType = {
             {id: 3, name: "Islam"},
             {id: 4, name: "Abdurrahman"},
          ],
-      }
+         newMessageBody: ''
+      },
+      sidebar: {},
    },
    _callSubscriber() {
       console.log('State changed')
@@ -85,20 +77,11 @@ const store: StoreType = {
    },
 
    dispatch(action) {
-      if (action.type === ADD_POST) {
-         const newPost :PostsType = {
-            id: 5,
-            message: action.postText,
-            likesCount: 0,
-         }
-         this._state.profilePage.posts.push(newPost)
-         this._callSubscriber()
-      } else if(action.type === CHANGE_NEW_TEXT) {
-         this._state.profilePage.newPostText = action.newText
-         this._callSubscriber()
-      }
+      this._state.profilePage = profileReducer(this._state.profilePage, action)
+      this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+      this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+      this._callSubscriber()
    }
-
 }
 
 export default store
