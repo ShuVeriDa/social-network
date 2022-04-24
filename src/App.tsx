@@ -4,7 +4,7 @@ import {Header} from "./Components/Header/Header";
 import {NavBar} from "./Components/NavBar/NavBar";
 import {Profile} from "./Components/Profile/Profile";
 import {Routes, Route} from "react-router-dom";
-import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 export type AppType = {
 }
@@ -17,12 +17,10 @@ function App(props: AppType) {
          <div className='app-wrapper-content'>
             <Routes>
                <Route path="/profile" element={<Profile />}/>
-               <Route path="/dialogs" element={<DialogsContainer />}/>
+               <Route path="/dialogs" element={DialogsContainer}/>
             </Routes>
          </div>
       </div>
-
-
    )
 }
 

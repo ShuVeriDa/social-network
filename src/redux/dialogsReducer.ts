@@ -1,4 +1,19 @@
-import {ActionsTypes, DialogsPageType} from "./store";
+import {ActionsTypes} from "./store";
+
+export type DialogsDataType = {
+   id: number
+   name: string
+}
+export type MessagesDataType = {
+   id: number
+   message: string
+}
+
+export type DialogsPageType = {
+   messages: Array<MessagesDataType>
+   dialogs: Array<DialogsDataType>
+   newMessageBody: string
+}
 
 const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY"
 const SEND_MESSAGE = "SEND-MESSAGE"
@@ -19,7 +34,7 @@ let initialState: DialogsPageType = {
       newMessageBody: ''
    }
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action :ActionsTypes) => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action :ActionsTypes):DialogsPageType => {
 
    switch (action.type) {
       case UPDATE_NEW_MESSAGE_BODY:

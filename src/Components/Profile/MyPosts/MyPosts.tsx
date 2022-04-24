@@ -1,14 +1,14 @@
 import React, {RefObject} from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ActionsTypes, PostsType} from "../../../redux/store";
-import {addPostAC} from "../../../redux/profileReducer";
+import {PostsType} from "../../../redux/profileReducer";
 
 type MyPostsType = {
    posts: Array<PostsType>
    newPostText: string
    updateNewPostText: (text: string) => void
-   addPost: () => void
+   addPost: (postText: string) => void
+   onPostChange: (text: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
@@ -17,13 +17,13 @@ const MyPosts = (props: MyPostsType) => {
    const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
    const onAddPost = () => {
-      props.addPost()
+      props.addPost(props.newPostText)
    }
 
    const onPostChange = () => {
       if (newPostElement.current) {
          let text = newPostElement.current.value
-         props.updateNewPostText(text)
+         props.onPostChange(text)
       }
    }
 
