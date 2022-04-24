@@ -6,8 +6,8 @@ import {PostsType} from "../../../redux/profileReducer";
 type MyPostsType = {
    posts: Array<PostsType>
    newPostText: string
-   updateNewPostText: (text: string) => void
-   addPost: (postText: string) => void
+   // updateNewPostText: (text: string) => void
+   addPost: () => void
    onPostChange: (text: string) => void
 }
 
@@ -17,7 +17,7 @@ const MyPosts = (props: MyPostsType) => {
    const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
    const onAddPost = () => {
-      props.addPost(props.newPostText)
+      props.addPost()
    }
 
    const onPostChange = () => {

@@ -18,7 +18,7 @@ const mapStateToProps = (state: mapStateToPropsType) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
    return {
-      addPost: (postText: string) => dispatch(addPostAC(postText)),
+      addPost: () => dispatch(addPostAC()),
       onPostChange: (text: string) => {
          let action = updateNewMessageBodyAC(text)
          dispatch(action)
@@ -26,6 +26,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
    }
 }
 
-const MyPostsContainer = () => connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer
