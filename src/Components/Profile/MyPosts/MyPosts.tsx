@@ -6,13 +6,13 @@ import {PostsType} from "../../../redux/profileReducer";
 type MyPostsType = {
    posts: Array<PostsType>
    newPostText: string
-   // updateNewPostText: (text: string) => void
+   updateNewPostText: (text: string) => void
    addPost: () => void
-   onPostChange: (text: string) => void
+   // onPostChange: (text: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
-   const postsElement = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />)
+   const postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />)
 
    const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
@@ -23,7 +23,7 @@ const MyPosts = (props: MyPostsType) => {
    const onPostChange = () => {
       if (newPostElement.current) {
          let text = newPostElement.current.value
-         props.onPostChange(text)
+         props.updateNewPostText(text)
       }
    }
 
@@ -42,7 +42,7 @@ const MyPosts = (props: MyPostsType) => {
           </div>
          </div>
          <div className={classes.posts}>
-            {postsElement}
+            {postsElements}
          </div>
       </div>
    );
