@@ -1,5 +1,6 @@
 import {ActionsTypes} from "./store";
 
+
 export type DialogsDataType = {
    id: number
    name: string
@@ -33,6 +34,7 @@ let initialState: DialogsPageType = {
       ],
       newMessageBody: ''
    }
+
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action :ActionsTypes):DialogsPageType => {
 
