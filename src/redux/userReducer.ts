@@ -13,6 +13,10 @@ export type UserType = {
    status: string
    location: UsersLocationType
    photoUrl: string
+   photos: {
+      small: string
+      large: string
+   }
 }
 
 export type UsersLocationType = {
