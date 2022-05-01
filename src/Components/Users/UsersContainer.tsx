@@ -1,9 +1,9 @@
 import React from 'react';
-import {Users} from "./Users";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {followAC, initialStateType, setUsersAC, unfollowAC, UserType} from "../../redux/userReducer";
 import {AppStateType} from "../../redux/redux-store";
+import {User} from "./Users";
 
 type MapStateToPropsFactoryType = {
    usersPage: initialStateType
@@ -38,4 +38,4 @@ const mapDispatchToPropsFactory = (dispatch: Dispatch): MapDispatchToPropsFactor
    }
 }
 
-export default connect(mapStateToPropsFactory, mapDispatchToPropsFactory)(Users)
+export default connect(mapStateToPropsFactory, mapDispatchToPropsFactory)(User)
