@@ -5,18 +5,14 @@ import axios from "axios";
 import {UserType} from "../../redux/userReducer";
 import React from "react";
 
+
 export class User extends React.Component<any, any> {
-
-   constructor(props: any) {
-      super(props);
-
+   componentDidMount() {
       axios.get("https://social-network.samuraijs.com/api/1.0/users")
          .then(response => {
             this.props.setUsers(response.data.items)
          })
    }
-
-
 
    render() {
       return (
