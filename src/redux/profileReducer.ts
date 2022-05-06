@@ -1,4 +1,5 @@
 import {ActionsTypes, StateType} from "./store";
+import {followAC, setUsersAC, unfollowAC} from "./userReducer";
 
 export type PostsType = {
    id: number
@@ -45,6 +46,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
          return state
    }
 }
+
+export type profileReducerType = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>
 
 export const addPostAC = () => {
    return {

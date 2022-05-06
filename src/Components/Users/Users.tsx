@@ -1,24 +1,64 @@
-
 import userPhoto from "../../assets/images/user.png";
 import classes from "./users.module.css";
 import axios from "axios";
 import {UserType} from "../../redux/userReducer";
 import React from "react";
+import {MapDispatchToPropsFactoryType, MapStateToPropsFactoryType} from "./UsersContainer";
 
+type UserClassType = {
+   users: UserType[]
+   pageSize: number
+   totalUsersCount: number
+   currentPage: number
+   follow: (userID: number) => void
+   unfollow: (userID: number) => void
+   setUsers: (users: UserType[]) => void
+   setCurrentPage: (pageNumber: number) => void
+   setTotalUsersCount: (totalCount: number) => void
+}
 
-export class User extends React.Component<any, any> {
+type UserClassApiType = {
+
+}
+
+export class User extends React.Component<UserClassType, any> {
    componentDidMount() {
-      axios.get("https://social-network.samuraijs.com/api/1.0/users")
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+         .then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
+         })
+   }
+
+   onPageChanged = (pageNumber: number) => {
+      this.props.setCurrentPage(pageNumber)
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
          .then(response => {
             this.props.setUsers(response.data.items)
          })
    }
 
    render() {
+
+      let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+
+      let pages = []
+      for (let i = 1; i <= pagesCount; i++) {
+         pages.push(i)
+      }
+
       return (
          <div>
+            <div>
+               {pages.map(p => {
+                    return <span className={this.props.currentPage === p ? classes.selectedPage : ""}
+                                 onClick={(e) => this.onPageChanged(p)}
+                    > {p}
+                    </span>
+               })}
+            </div>
             {
-               this.props.usersPage.users.map((u: UserType) => {
+               this.props.users.map((u: UserType) => {
                   return (
                      <div key={u.id}>
                      <span>
@@ -34,7 +74,7 @@ export class User extends React.Component<any, any> {
                      </span>
                         <span>
                         <span>
-                           <div>{u.fullName}</div>
+                           <div>{u.name}</div>
                            <div>{u.status}</div>
                         </span>
                         <span>
