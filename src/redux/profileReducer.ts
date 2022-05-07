@@ -1,5 +1,5 @@
 import {ActionsTypes, StateType} from "./store";
-import {followAC, setUsersAC, unfollowAC} from "./userReducer";
+import {follow, setUsers, unfollow} from "./userReducer";
 
 export type PostsType = {
    id: number
