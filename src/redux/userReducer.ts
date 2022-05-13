@@ -6,7 +6,7 @@ export const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 export const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
 
 export type initialStateType = {
-   users: UserType[]
+   users: Array<UserType>
    pageSize: number
    totalUsersCount: number
    currentPage: number
@@ -20,10 +20,12 @@ export type UserType = {
    status: string
    location: UsersLocationType
    photoUrl: string
-   photos: {
-      small: string
-      large: string
-   }
+   photos: PhotosType
+}
+
+export type PhotosType = {
+   small: string
+   large: string
 }
 
 export type UsersLocationType = {
@@ -32,30 +34,34 @@ export type UsersLocationType = {
 }
 
 const initialState: initialStateType = {
-   users: [ ],
+   users: [],
    pageSize: 5,
    totalUsersCount: 0,
    currentPage: 1,
    isFetching: true,
 }
 
-export const userReducer = (state:initialStateType = initialState, action: userReducerACType) => {
+export const userReducer = (state:initialStateType = initialState, action: userReducerACType): initialStateType => {
    switch (action.type) {
       case FOLLOW:
          return {
             ...state,
             users: state.users.map(u => {
-               if (u.id === action.userID)
+               if (u.id === action.userID) {
                   return {...u, followed: true}
-            }),
-
+               }
+                  return u
+            }
+            )
          }
       case UNFOLLOW:
          return {
             ...state,
             users: state.users.map(u => {
-               if (u.id === action.userID)
+               if (u.id === action.userID) {
                   return {...u, followed: false}
+               }
+                  return u
             }),
 
          }

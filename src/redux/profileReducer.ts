@@ -1,6 +1,10 @@
 import {ActionsTypes, StateType} from "./store";
 import {follow, setUsers, unfollow} from "./userReducer";
 
+export const ADD_POST = 'ADD-POST'
+export const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT"
+export const SET_USER_PROFILE = "SET-USER-PROFILE"
+
 export type PostsType = {
    id: number
    message: string
@@ -13,9 +17,6 @@ export type ProfilePageType = {
    profile: null
 }
 
-const ADD_POST = 'ADD-POST'
-const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT"
-const SET_USER_PROFILE = "SET-USER-PROFILE"
 
 let initialState: ProfilePageType = {
    posts: [

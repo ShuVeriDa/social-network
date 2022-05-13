@@ -10,6 +10,7 @@ import ProfileContainer from "./Components/Profile/ProfileContainer";
 
 
 export type AppType = {
+
 }
 
 function App(props: AppType) {

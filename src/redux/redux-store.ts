@@ -13,7 +13,7 @@ export const rootReducer = combineReducers({
    usersPage: userReducer,
 });
 
-export type AppStateType = ReturnType<typeof rootReducer>
+export type RootReducerType = ReturnType<typeof rootReducer>
 
 const store = createStore(rootReducer)
 

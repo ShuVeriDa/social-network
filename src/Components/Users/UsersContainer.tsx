@@ -10,9 +10,14 @@ import axios from "axios";
 import {Users} from "./Users";
 import preloader from '../../assets/images/preloader.png'
 import {Preloader} from "../common/Preloader/Preloader";
+import {RootReducerType} from "../../redux/redux-store";
 
 export type MapStateToPropsFactoryType = {
-   usersPage: initialStateType
+   users: UserType[]
+   pageSize: number
+   totalUsersCount: number
+   currentPage: number
+   isFetching: boolean
 }
 
 export type MapDispatchToPropsFactoryType = {
@@ -31,16 +36,16 @@ type UsersUsersContainerType = {
    pageSize: number
    totalUsersCount: number
    currentPage: number
+   isFetching: boolean
    follow: (userID: number) => void
    unfollow: (userID: number) => void
    setUsers: (users: UserType[]) => void
    setCurrentPage: (pageNumber: number) => void
    setTotalUsersCount: (totalCount: number) => void
    toggleIsFetching: (isFetching: boolean) => void
-   isFetching: boolean
 }
 
-class UsersContainer extends React.Component<UsersUsersContainerType, any> {
+class UsersContainer extends React.Component<UserPropsType, any> {
    componentDidMount() {
       this.props.toggleIsFetching(true)
       axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -80,7 +85,7 @@ class UsersContainer extends React.Component<UsersUsersContainerType, any> {
    }
 }
 
-const mapStateToPropsFactory = (state: MapStateToPropsFactoryType) => {
+const mapStateToPropsFactory = (state: RootReducerType): MapStateToPropsFactoryType => {
    return {
       users: state.usersPage.users,
       pageSize: state.usersPage.pageSize,
