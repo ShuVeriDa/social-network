@@ -24,7 +24,7 @@ class HeaderContainer extends React.Component<any, any> {
          .then(response => {
             if (response.data.resultCode === 0) {
                let {id, login, email} = response.data.data
-               this.props.setAuthUserDataAC(id, login, email)
+               this.props.setAuthUserDataAC({id, login, email})
             }
          })
    }
