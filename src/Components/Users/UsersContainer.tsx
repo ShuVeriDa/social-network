@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-   follow,  setCurrentPage,
+   follow, setCurrentPage,
    setUsers, setTotalUsersCount, toggleIsFetching,
-   unfollow, UserType,
+   unfollow, UserType, toggleIsFollowingProgressAC,
 } from "../../redux/userReducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
@@ -16,6 +16,7 @@ export type MapStateToPropsFactoryType = {
    totalUsersCount: number
    currentPage: number
    isFetching: boolean
+   followingInProgress: Array<boolean | number>
 }
 
 export type MapDispatchToPropsFactoryType = {
@@ -25,6 +26,7 @@ export type MapDispatchToPropsFactoryType = {
    setCurrentPage: (pageNumber: number) => void
    setTotalUsersCount: (totalCount: number) => void
    toggleIsFetching: (isFetching: boolean) => void
+   toggleIsFollowingProgressAC: (isFetching: boolean, userId: number) => void
 }
 
 export type UserPropsType = MapStateToPropsFactoryType & MapDispatchToPropsFactoryType
@@ -76,6 +78,8 @@ class UsersContainer extends React.Component<UserPropsType, any> {
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
                    onPageChanged={this.onPageChanged}
+                   toggleIsFollowingProgressAC={this.props.toggleIsFollowingProgressAC}
+                   followingInProgress={this.props.followingInProgress}
             />
       </>
 
@@ -89,7 +93,8 @@ const mapStateToPropsFactory = (state: RootReducerType): MapStateToPropsFactoryT
       pageSize: state.usersPage.pageSize,
       totalUsersCount: state.usersPage.totalUsersCount,
       currentPage: state.usersPage.currentPage,
-      isFetching: state.usersPage.isFetching
+      isFetching: state.usersPage.isFetching,
+      followingInProgress: state.usersPage.followingInProgress,
    }
 }
 
@@ -121,4 +126,5 @@ export default connect(mapStateToPropsFactory, {
    follow, unfollow,
    setUsers, setCurrentPage,
    setTotalUsersCount, toggleIsFetching,
+   toggleIsFollowingProgressAC,
 })(UsersContainer)
