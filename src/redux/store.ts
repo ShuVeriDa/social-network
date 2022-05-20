@@ -1,7 +1,15 @@
 import {addPostAC, changeNewTextAC, profileReducer, setUserProfileAC} from "./profileReducer";
 import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
-import {follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow} from "./userReducer";
+import {
+   follow,
+   followSucces,
+   setCurrentPage,
+   setTotalUsersCount,
+   setUsers,
+   toggleIsFetching,
+   unfollow, unfollowSucces
+} from "./userReducer";
 
 export type PostsType = {
    id: number
@@ -44,8 +52,8 @@ export type ActionsTypes = ReturnType<typeof addPostAC> |
    ReturnType<typeof updateNewMessageBodyAC> |
    ReturnType<typeof sendMessageAC> |
    ReturnType<typeof setUserProfileAC> |
-   ReturnType<typeof follow> |
-   ReturnType<typeof unfollow> |
+   ReturnType<typeof followSucces> |
+   ReturnType<typeof unfollowSucces> |
    ReturnType<typeof setUsers> |
    ReturnType<typeof setCurrentPage> |
    ReturnType<typeof setTotalUsersCount> |
@@ -91,7 +99,7 @@ const store: StoreType = {
 
    dispatch(action) {
       this._state.profilePage = profileReducer(this._state.profilePage, action)
-      this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+      // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
       this._state.sidebar = sidebarReducer(this._state.sidebar, action)
       this._callSubscriber()
    }

@@ -1,9 +1,10 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {userReducer} from "./userReducer";
 import {authReducer} from "./authReducer";
+import thunkMiddleware from "redux-thunk";
 
 export type ReducersType = typeof store
 
@@ -17,6 +18,6 @@ export const rootReducer = combineReducers({
 
 export type RootReducerType = ReturnType<typeof rootReducer>
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 export default store
