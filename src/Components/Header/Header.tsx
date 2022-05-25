@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 
 type HeaderType = {
    isAuth: boolean,
-   login: null,
+   login: null | string
 }
 
 const Header: FC<HeaderType> = ({isAuth, login, ...props}) => {

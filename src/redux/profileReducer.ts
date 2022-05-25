@@ -1,5 +1,7 @@
 import {ActionsTypes, StateType} from "./store";
 import {follow, setUsers, unfollow} from "./userReducer";
+import {Dispatch} from "redux";
+import {usersAPI} from "../Components/api/api";
 
 export const ADD_POST = 'ADD-POST'
 export const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT"
@@ -73,4 +75,11 @@ export const setUserProfileAC = (profile: null) => {
       type: SET_USER_PROFILE,
       profile
    } as const
+}
+
+export const getUserProfileAC = (userId: number) => (dispatch: Dispatch) => {
+   usersAPI.getProfile(userId)
+      .then(response => {
+         dispatch(setUserProfileAC(response.data))
+      })
 }
