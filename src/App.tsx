@@ -6,6 +6,7 @@ import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import {LoginPage} from "./Components/Login/LoginPage";
 
 
 export type AppType = {
@@ -23,6 +24,7 @@ function App(props: AppType) {
                <Route path='/profile' element={<ProfileContainer />} />
                <Route path="/dialogs" element={<DialogsContainer />}/>
                <Route path="/users" element={<UsersContainer />}/>
+               <Route path="/login" element={<LoginPage />}/>
             </Routes>
          </div>
       </div>

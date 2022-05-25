@@ -3,7 +3,7 @@ import {authAPI} from "../Components/api/api";
 
 export const SET_USER_DATA = "SET-USER-DATA"
 
-type initialStateType = {
+export type initialStateType = {
    userId: null | number,
    email: null | string
    login: null | string
