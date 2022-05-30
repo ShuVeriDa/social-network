@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {Profile} from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
@@ -6,6 +6,7 @@ import {getUserProfileAC, ProfilePageType, setUserProfileAC} from "../../redux/p
 import {Navigate, useLocation, useMatch, useNavigate, useParams} from "react-router-dom";
 import { RootReducerType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 export type MapStateToPropsType = {
    profile: null
@@ -21,18 +22,6 @@ export type MapDispatchToPropsType = {
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export const withRouter = (WrappedComponent: typeof React.Component) => {
-   return (props: object) => {
-
-      const params = useParams(); //useParams возвращает объект пары key/value (ключ/значение) параметров URL.
-
-      return (
-         <WrappedComponent {...props} router={params}/>
-      );
-   }
-}
-
-
 class ProfileContainer extends React.Component<PropsType, any> {
    componentDidMount() {
       let userId = this.props.router.userId || 2
@@ -47,11 +36,23 @@ class ProfileContainer extends React.Component<PropsType, any> {
    }
 }
 
+export const withRouter = (WrappedComponent: typeof React.Component) => {
+   return (props: object) => {
+
+      const params = useParams(); //useParams возвращает объект пары key/value (ключ/значение) параметров URL.
+
+      return (
+         <WrappedComponent {...props} router={params}/>
+      );
+   }
+}
 
 let mapStateToProps = (state: RootReducerType): MapStateToPropsType => ({
    profile: state.profilePage.profile,
 })
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
-
-export default withAuthRedirect(connect(mapStateToProps, {getUserProfileAC})(WithUrlDataContainerComponent))
+export default compose<ComponentType>(
+   connect(mapStateToProps, {getUserProfileAC: getUserProfileAC}),
+   withRouter,
+   withAuthRedirect
+)(ProfileContainer)

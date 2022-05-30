@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
+import React, {ComponentType, FC} from 'react';
 import classes from './Dialogs.module.css'
 import {DialogsPageType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {initialStateType} from "../../redux/authReducer";
 import {Navigate} from "react-router-dom";
 import {getUserProfileAC, setUserProfileAC} from "../../redux/profileReducer";
@@ -31,8 +31,7 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
    }
 }
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
-
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
-
-export default DialogsContainer
+export default compose<ComponentType>(
+   connect(mapStateToProps, mapDispatchToProps),
+   withAuthRedirect
+) (Dialogs)

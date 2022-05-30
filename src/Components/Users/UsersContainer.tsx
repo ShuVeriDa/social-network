@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from "react-redux";
 import {
    setCurrentPage, UserType,
@@ -8,6 +8,7 @@ import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {RootReducerType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 export type MapStateToPropsFactoryType = {
    users: UserType[]
@@ -54,7 +55,7 @@ class UsersContainer extends React.Component<UserPropsType, any> {
    render() {
       return (
          <>
-            {this.props.isFetching ? <Preloader /> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users users={this.props.users}
                    totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
@@ -64,7 +65,7 @@ class UsersContainer extends React.Component<UserPropsType, any> {
                    onPageChanged={this.onPageChanged}
                    followingInProgress={this.props.followingInProgress}
             />
-      </>
+         </>
 
       );
    }
@@ -81,8 +82,9 @@ const mapStateToPropsFactory = (state: RootReducerType): MapStateToPropsFactoryT
    }
 }
 
-let withRedirect = withAuthRedirect(UsersContainer)
-
-export default connect(mapStateToPropsFactory, {
-   follow, unfollow, setCurrentPage, toggleIsFollowingProgressAC, getUsers
-})(withRedirect)
+export default compose<ComponentType>(
+   connect(mapStateToPropsFactory, {
+      follow, unfollow, setCurrentPage, toggleIsFollowingProgressAC, getUsers
+   }),
+   withAuthRedirect,
+)(UsersContainer)
