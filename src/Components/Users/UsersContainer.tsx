@@ -7,6 +7,7 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {RootReducerType} from "../../redux/redux-store";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type MapStateToPropsFactoryType = {
    users: UserType[]
@@ -80,30 +81,8 @@ const mapStateToPropsFactory = (state: RootReducerType): MapStateToPropsFactoryT
    }
 }
 
-// const mapDispatchToPropsFactory = (dispatch: Dispatch): MapDispatchToPropsFactoryType => {
-//    return {
-//       follow: (userID: number) => {
-//          dispatch(followAC(userID))
-//       },
-//       unfollow: (userID: number) => {
-//          dispatch(unfollowAC(userID))
-//       },
-//       setUsers: (users: UserType[]) => {
-//          dispatch(setUsersAC(users))
-//       },
-//       setCurrentPage: (pageNumber: number) => {
-//          dispatch(setCurrentPageAC(pageNumber))
-//       },
-//       setTotalUsersCount: (totalCount: number) => {
-//          dispatch(setUsersTotalCountAC(totalCount))
-//       },
-//       toggleIsFetching: (isFetching: boolean) => {
-//          dispatch(setisFetchingAC(isFetching))
-//       },
-//
-//    }
-// }
+let withRedirect = withAuthRedirect(UsersContainer)
 
 export default connect(mapStateToPropsFactory, {
    follow, unfollow, setCurrentPage, toggleIsFollowingProgressAC, getUsers
-})(UsersContainer)
+})(withRedirect)
