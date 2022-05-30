@@ -1,4 +1,4 @@
-import {addPostAC, changeNewTextAC, profileReducer, setUserProfileAC} from "./profileReducer";
+import {addPostAC, changeNewTextAC, profileReducer, setStatusAC, setUserProfileAC} from "./profileReducer";
 import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {
@@ -57,7 +57,8 @@ export type ActionsTypes = ReturnType<typeof addPostAC> |
    ReturnType<typeof setUsers> |
    ReturnType<typeof setCurrentPage> |
    ReturnType<typeof setTotalUsersCount> |
-   ReturnType<typeof toggleIsFetching>
+   ReturnType<typeof toggleIsFetching> |
+   ReturnType<typeof setStatusAC>
 
 const store: StoreType = {
    _state: {
@@ -98,7 +99,7 @@ const store: StoreType = {
    },
 
    dispatch(action) {
-      this._state.profilePage = profileReducer(this._state.profilePage, action)
+      // this._state.profilePage = profileReducer(this._state.profilePage, action)
       // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
       this._state.sidebar = sidebarReducer(this._state.sidebar, action)
       this._callSubscriber()

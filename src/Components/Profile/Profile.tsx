@@ -5,12 +5,14 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 type ProfileType = {
    profile: any
+   status: string
+   updateStatus: (status: string) => void
 }
 
 const Profile: FC<ProfileType> = ({ ...props}) => {
    return (
       <div className={classes.content}>
-         <ProfilelInfo profile={props.profile}/>
+         <ProfilelInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
          <MyPostsContainer />
       </div>
    );
