@@ -2,19 +2,32 @@ import {Field, Form, InjectedFormProps, reduxForm} from "redux-form";
 import {FC} from "react";
 import {Input} from "../common/FormsControls/FromsControls";
 import {required} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {login} from "../../redux/authReducer";
+import {Navigate} from "react-router-dom";
+import {RootReducerType} from "../../redux/redux-store";
 
 type FormDataType = {
-   login: string
+   email: string
    password: string
    rememberMe: boolean
+}
+
+type LoginType = {
+   login: (email: string, password: string, rememberMe: boolean) => void
+   isAuth: boolean
+}
+
+type MapStateToPropsType = {
+   isAuth: boolean
 }
 
 const LoginForm:FC<InjectedFormProps<FormDataType>> = (props) => {
    return (
          <form onSubmit={props.handleSubmit}>
             <div>
-               <Field placeholder={'Login'}
-                      name={'login'}
+               <Field placeholder={'Email'}
+                      name={'email'}
                       component={Input}
                       validate={[required]}
                />
@@ -24,6 +37,7 @@ const LoginForm:FC<InjectedFormProps<FormDataType>> = (props) => {
                       name={'password'}
                       component={Input}
                       validate={[required]}
+                      type='password'
                />
             </div>
             <div>
@@ -38,9 +52,14 @@ const LoginForm:FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-export const Login = () => {
+const Login = (props: LoginType) => {
    const onSubmit = (formData: FormDataType) => {
-      console.log(formData)
+      props.login(formData.email, formData.password, formData.rememberMe)
+   }
+
+
+   if (props.isAuth) {
+      return <Navigate to={'profile'} />
    }
    return (
       <div>
@@ -49,3 +68,13 @@ export const Login = () => {
       </div>
    )
 }
+
+
+const mapStateToProps = (state: RootReducerType): MapStateToPropsType => {
+   return {
+      isAuth: state.auth.isAuth
+   }
+
+}
+
+export default connect(mapStateToProps, {login}) (Login)
