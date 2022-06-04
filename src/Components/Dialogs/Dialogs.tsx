@@ -1,10 +1,10 @@
-import React, {FC, FormEventHandler} from 'react';
+import React, {FC} from 'react';
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DIalog/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsPageType } from "../../redux/store";
+import {DialogsPageType} from "../../redux/store";
 import {Navigate} from "react-router-dom";
-import {Field, reduxForm} from "redux-form";
+import AddMessageForm from "./AddMessageForm/AddMessageForm";
 
 type DialogsType = {
    updateNewMessageBodyAC: (body: string) => void
@@ -34,26 +34,7 @@ export const Dialogs: FC<DialogsType> = ({ ...props}) => {
          <div className={classes.messages}>
             <div>{messagesElements}</div>
          </div>
-         <AddMessageFormRedux onSubmit={addNewMessage}/>
+         <AddMessageForm onSubmit={addNewMessage}/>
       </div>
    );
 }
-
-type AddMessageFormType = {
-   handleSubmit: FormEventHandler<HTMLFormElement>
-}
-
-export const AddMessageForm = (props: AddMessageFormType) => {
-   return (
-      <form onSubmit={props.handleSubmit}>
-         <div>
-            <Field component='textarea' name='newMessageBody' placeholder="Enter your message"/>
-         </div>
-         <div>
-            <button>Send</button>
-         </div>
-      </form>
-   )
-}
-
-const AddMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddMessageForm)
