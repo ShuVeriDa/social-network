@@ -1,6 +1,6 @@
 import {Field, reduxForm} from "redux-form";
 import React, {FormEventHandler} from "react";
-import {TextArea} from "../../common/FormsControls/FromsControls";
+import {TextArea} from "../../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 
 type AddMessageFormType = {

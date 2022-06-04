@@ -4,7 +4,7 @@ import {Post} from "./Post/Post";
 import {PostsType} from "../../../redux/profileReducer";
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
-import {TextArea} from "../../common/FormsControls/FromsControls";
+import {TextArea} from "../../common/FormsControls/FormsControls";
 
 type MyPostsType = {
    posts: Array<PostsType>

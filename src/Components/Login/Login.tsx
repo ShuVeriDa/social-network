@@ -1,11 +1,12 @@
 import {Field, Form, InjectedFormProps, reduxForm} from "redux-form";
 import {FC} from "react";
-import {Input} from "../common/FormsControls/FromsControls";
+import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/authReducer";
 import {Navigate} from "react-router-dom";
 import {RootReducerType} from "../../redux/redux-store";
+import classes from '../common/FormsControls/FormsControls.module.css'
 
 type FormDataType = {
    email: string
@@ -44,6 +45,9 @@ const LoginForm:FC<InjectedFormProps<FormDataType>> = (props) => {
                <Field type="checkbox" name={'rememberMe'} component={Input}/>
                remember me
             </div>
+            {props.error && <div className={classes.formSummaryError}>
+               {props.error}
+            </div>}
             <div>
                <button>Login</button></div>
          </form>
@@ -59,7 +63,7 @@ const Login = (props: LoginType) => {
 
 
    if (props.isAuth) {
-      return <Navigate to={'profile'} />
+      return <Navigate to={'/profile'} />
    }
    return (
       <div>

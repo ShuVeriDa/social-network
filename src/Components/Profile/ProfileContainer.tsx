@@ -1,9 +1,8 @@
 import React, {ComponentType} from "react";
 import {Profile} from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
-import {getStatus, getUserProfileAC, ProfilePageType, setUserProfileAC, updateStatus} from "../../redux/profileReducer";
-import {Navigate, useLocation, useMatch, useNavigate, useParams} from "react-router-dom";
+import {getStatus, getUserProfileAC,  updateStatus} from "../../redux/profileReducer";
+import { useParams} from "react-router-dom";
 import { RootReducerType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -11,7 +10,8 @@ import {compose} from "redux";
 export type MapStateToPropsType = {
    profile: null
    status: string
-   // isAuth: boolean
+   authorizedUserId: number | null
+   isAuth: boolean
 }
 
 export type MapDispatchToPropsType = {
@@ -27,7 +27,7 @@ type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class ProfileContainer extends React.Component<PropsType, any> {
    componentDidMount() {
-      let userId = this.props.router.userId || 2
+      let userId = this.props.router.userId || this.props.authorizedUserId
       this.props.getUserProfileAC(userId)
       this.props.getStatus(userId)
    }
@@ -35,7 +35,11 @@ class ProfileContainer extends React.Component<PropsType, any> {
    render() {
 
      return (
-        <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+        <Profile {...this.props}
+                 profile={this.props.profile}
+                 status={this.props.status}
+                 updateStatus={this.props.updateStatus}
+        />
      )
    }
 }
@@ -53,7 +57,9 @@ export const withRouter = (WrappedComponent: typeof React.Component) => {
 
 let mapStateToProps = (state: RootReducerType): MapStateToPropsType => ({
    profile: state.profilePage.profile,
-   status: state.profilePage.status
+   status: state.profilePage.status,
+   authorizedUserId: state.auth.userId,
+   isAuth: state.auth.isAuth
 })
 
 export default compose<ComponentType>(

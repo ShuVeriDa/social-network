@@ -1,5 +1,5 @@
 import {FC} from "react";
-import classes from './FromsControls.module.css'
+import classes from './FormsControls.module.css'
 import {Simulate} from "react-dom/test-utils";
 
 type FormControlType = {

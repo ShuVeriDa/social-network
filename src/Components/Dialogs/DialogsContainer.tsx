@@ -1,12 +1,8 @@
-import React, {ComponentType, FC} from 'react';
-import classes from './Dialogs.module.css'
+import React, {ComponentType} from 'react';
 import {DialogsPageType, sendMessageAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
-import {initialStateType} from "../../redux/authReducer";
-import {Navigate} from "react-router-dom";
-import {getUserProfileAC, setUserProfileAC} from "../../redux/profileReducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {RootReducerType} from "../../redux/redux-store";
 
