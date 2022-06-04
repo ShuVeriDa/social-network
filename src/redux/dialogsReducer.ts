@@ -13,10 +13,9 @@ export type MessagesDataType = {
 export type DialogsPageType = {
    messages: Array<MessagesDataType>
    dialogs: Array<DialogsDataType>
-   newMessageBody: string
+
 }
 
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY"
 const SEND_MESSAGE = "SEND-MESSAGE"
 
 let initialState: DialogsPageType = {
@@ -32,22 +31,16 @@ let initialState: DialogsPageType = {
          {id: 3, name: "Islam"},
          {id: 4, name: "Abdurrahman"},
       ],
-      newMessageBody: ''
+
    }
 
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: dialogsReducerAC):DialogsPageType => {
    switch (action.type) {
-      case UPDATE_NEW_MESSAGE_BODY:
-         return {
-            ...state,
-            newMessageBody: action.body
-         }
       case SEND_MESSAGE:
-         let body = state.newMessageBody
+         let body = action.newMessageBody
          return {
             ...state,
-            newMessageBody: '',
             messages: [...state.messages, {id: 5, message: body}]
          }
       default:
@@ -56,17 +49,11 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: di
 }
 
 type dialogsReducerAC =
-   ReturnType<typeof updateNewMessageBodyAC> |
    ReturnType<typeof sendMessageAC>
 
-export const updateNewMessageBodyAC = (body: string) => {
-   return {
-      type: UPDATE_NEW_MESSAGE_BODY,
-      body: body
-   } as const
-}
-export const sendMessageAC = () => {
+export const sendMessageAC = (newMessageBody: string) => {
    return {
       type: SEND_MESSAGE,
+      newMessageBody
    } as const
 }

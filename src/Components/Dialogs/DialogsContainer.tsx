@@ -1,6 +1,6 @@
 import React, {ComponentType, FC} from 'react';
 import classes from './Dialogs.module.css'
-import {DialogsPageType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogsReducer";
+import {DialogsPageType, sendMessageAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
@@ -22,11 +22,8 @@ let mapStateToProps = (state: RootReducerType): DialogsContainerType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch) => {
    return {
-      updateNewMessageBodyAC: (body: string) => {
-         dispatch(updateNewMessageBodyAC(body))
-      },
-      sendMessageAC: () => {
-         dispatch(sendMessageAC())
+      sendMessageAC: (newMessageBody: string) => {
+         dispatch(sendMessageAC(newMessageBody))
       }
    }
 }

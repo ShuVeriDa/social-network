@@ -1,5 +1,5 @@
-import {addPostAC, changeNewTextAC, profileReducer, setStatusAC, setUserProfileAC} from "./profileReducer";
-import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogsReducer";
+import {addPostAC, profileReducer, setStatusAC, setUserProfileAC} from "./profileReducer";
+import {dialogsReducer, sendMessageAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {
    follow,
@@ -48,8 +48,6 @@ export type StoreType = {
    dispatch: (action: ActionsTypes) => void
 }
 export type ActionsTypes = ReturnType<typeof addPostAC> |
-   ReturnType<typeof changeNewTextAC> |
-   ReturnType<typeof updateNewMessageBodyAC> |
    ReturnType<typeof sendMessageAC> |
    ReturnType<typeof setUserProfileAC> |
    ReturnType<typeof followSucces> |

@@ -4,7 +4,6 @@ import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../Components/api/api";
 
 export const ADD_POST = 'ADD-POST'
-export const CHANGE_NEW_TEXT = "CHANGE-NEW-TEXT"
 export const SET_USER_PROFILE = "SET-USER-PROFILE"
 export const SET_STATUS = "SET-STATUS"
 
@@ -16,7 +15,6 @@ export type PostsType = {
 
 export type ProfilePageType = {
    posts: Array<PostsType>
-   newPostText: string
    profile: null
    status: string
 }
@@ -27,7 +25,6 @@ let initialState: ProfilePageType = {
       {id: 1, message: "Hi, how are you?", likesCount: 10},
       {id: 2, message: "It is my friend", likesCount: 13},
    ],
-   newPostText: 'it-kamasutra',
    profile: null,
    status: '',
 }
@@ -37,18 +34,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: pr
       case ADD_POST:
          const newPost: PostsType = {
             id: 5,
-            message: state.newPostText,
+            message: action.newPostText,
             likesCount: 0,
          }
          return {
             ...state,
             posts : [...state.posts, newPost],
-            newPostText: '',
-         }
-      case CHANGE_NEW_TEXT:
-         return {
-            ...state,
-            newPostText: action.newText
          }
       case SET_USER_PROFILE:
          return {...state, profile: action.profile}
@@ -61,24 +52,17 @@ export const profileReducer = (state: ProfilePageType = initialState, action: pr
 
 export type profileReducerType =
    ReturnType<typeof addPostAC> |
-   ReturnType<typeof changeNewTextAC> |
    ReturnType<typeof setUserProfileAC> |
    ReturnType<typeof setStatusAC>
 
 
 
-export const addPostAC = () => {
+export const addPostAC = (newPostText: string) => {
    return {
       type: ADD_POST,
+      newPostText
    } as const
 }
-export const changeNewTextAC = (newText: string) => {
-   return {
-      type: CHANGE_NEW_TEXT,
-      newText: newText
-   } as const
-}
-
 export const setUserProfileAC = (profile: null) => {
    return {
       type: SET_USER_PROFILE,
@@ -92,6 +76,7 @@ export const setStatusAC = (status: string) => {
       status
    } as const
 }
+
 
 export const getUserProfileAC = (userId: number) => (dispatch: Dispatch) => {
    usersAPI.getProfile(userId)

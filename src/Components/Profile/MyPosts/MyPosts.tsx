@@ -1,50 +1,50 @@
-import React, {RefObject} from "react";
+import React from "react";
 import classes from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {PostsType} from "../../../redux/profileReducer";
+import {Field, reduxForm} from "redux-form";
 
 type MyPostsType = {
    posts: Array<PostsType>
-   newPostText: string
-   updateNewPostText: (text: string) => void
-   addPost: () => void
-   // onPostChange: (text: string) => void
+   addPost: (newPostText: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
    const postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />)
-   const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
-   const onAddPost = () => {
-      props.addPost()
-   }
-
-   const onPostChange = () => {
-      if (newPostElement.current) {
-         let text = newPostElement.current.value
-         props.updateNewPostText(text)
-      }
+   const onAddPost = (values: any) => {
+      props.addPost(values.newPostText)
    }
 
    return (
       <div className={classes.postsBlock}>
-         My posts
-         <div>
-            <div>
-               <textarea ref={newPostElement}
-                         onChange={onPostChange}
-                         value={props.newPostText}
-               />
-            </div>
-          <div>
-             <button onClick={onAddPost}>AddPost</button>
-          </div>
-         </div>
+         <h3>My posts</h3>
+         <AddNewPostFormRedux onSubmit={onAddPost}/>
          <div className={classes.posts}>
             {postsElements}
          </div>
       </div>
    );
 };
+
+type AddNewPostFormType = {
+   handleSubmit: any;
+}
+
+const AddNewPostForm = (props: AddNewPostFormType) => {
+   return (
+      <form onSubmit={props.handleSubmit}>
+         <div>
+               <Field name='newPostText' component='textarea'/>
+         </div>
+         <div>
+            <button>AddPost</button>
+         </div>
+      </form>
+      )
+
+}
+
+const AddNewPostFormRedux = reduxForm({form: 'ProfileAddNewPostFrom'})(AddNewPostForm)
 
 export {MyPosts};
