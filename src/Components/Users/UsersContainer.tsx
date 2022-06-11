@@ -86,5 +86,4 @@ export default compose<ComponentType>(
    connect(mapStateToPropsFactory, {
       follow, unfollow, setCurrentPage, toggleIsFollowingProgressAC, getUsers
    }),
-   withAuthRedirect,
 )(UsersContainer)

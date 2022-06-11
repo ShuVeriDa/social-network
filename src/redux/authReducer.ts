@@ -53,6 +53,8 @@ export const getAuthUserDataAC = () => (dispatch: Dispatch) => {
             dispatch(setAuthUserDataAC(id, login, email, true))
          }
       })
+
+   return 'yo'
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
