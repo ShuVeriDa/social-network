@@ -1,14 +1,17 @@
 import React, {ComponentType} from 'react';
 import {connect} from "react-redux";
 import {
-   setCurrentPage, UserType,
-   toggleIsFollowingProgressAC, getUsers, follow, unfollow,
+   setCurrentPage, UserType, toggleIsFollowingProgressAC, requestUsers,
+   follow, unfollow,
 } from "../../redux/userReducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {RootReducerType} from "../../redux/redux-store";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+   getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize,
+   getTotalUsersCount, getUsers
+} from "../../redux/usersSelectors";
 
 export type MapStateToPropsFactoryType = {
    users: UserType[]
@@ -71,19 +74,29 @@ class UsersContainer extends React.Component<UserPropsType, any> {
    }
 }
 
+// const mapStateToPropsFactory = (state: RootReducerType): MapStateToPropsFactoryType => {
+//    return {
+//       users: state.usersPage.users,
+//       pageSize: state.usersPage.pageSize,
+//       totalUsersCount: state.usersPage.totalUsersCount,
+//       currentPage: state.usersPage.currentPage,
+//       isFetching: state.usersPage.isFetching,
+//       followingInProgress: state.usersPage.followingInProgress,
+//    }
+// }
 const mapStateToPropsFactory = (state: RootReducerType): MapStateToPropsFactoryType => {
    return {
-      users: state.usersPage.users,
-      pageSize: state.usersPage.pageSize,
-      totalUsersCount: state.usersPage.totalUsersCount,
-      currentPage: state.usersPage.currentPage,
-      isFetching: state.usersPage.isFetching,
-      followingInProgress: state.usersPage.followingInProgress,
+      users: getUsers(state),
+      pageSize: getPageSize(state),
+      totalUsersCount: getTotalUsersCount(state),
+      currentPage: getCurrentPage(state),
+      isFetching: getIsFetching(state),
+      followingInProgress: getFollowingInProgress(state),
    }
 }
 
 export default compose<ComponentType>(
    connect(mapStateToPropsFactory, {
-      follow, unfollow, setCurrentPage, toggleIsFollowingProgressAC, getUsers
+      follow, unfollow, setCurrentPage, toggleIsFollowingProgressAC, getUsers: requestUsers
    }),
 )(UsersContainer)
