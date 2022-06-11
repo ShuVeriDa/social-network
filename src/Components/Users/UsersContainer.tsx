@@ -10,7 +10,7 @@ import {RootReducerType} from "../../redux/redux-store";
 import {compose} from "redux";
 import {
    getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize,
-   getTotalUsersCount, getUsers
+   getTotalUsersCount, getUsers,
 } from "../../redux/usersSelectors";
 
 export type MapStateToPropsFactoryType = {
@@ -74,16 +74,6 @@ class UsersContainer extends React.Component<UserPropsType, any> {
    }
 }
 
-// const mapStateToPropsFactory = (state: RootReducerType): MapStateToPropsFactoryType => {
-//    return {
-//       users: state.usersPage.users,
-//       pageSize: state.usersPage.pageSize,
-//       totalUsersCount: state.usersPage.totalUsersCount,
-//       currentPage: state.usersPage.currentPage,
-//       isFetching: state.usersPage.isFetching,
-//       followingInProgress: state.usersPage.followingInProgress,
-//    }
-// }
 const mapStateToPropsFactory = (state: RootReducerType): MapStateToPropsFactoryType => {
    return {
       users: getUsers(state),
