@@ -11,7 +11,8 @@ type MyPostsType = {
    addPost: (newPostText: string) => void
 }
 
-const MyPosts = (props: MyPostsType) => {
+const MyPosts = React.memo((props: MyPostsType) => {
+
    const postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
    const onAddPost = (values: any) => {
@@ -27,7 +28,7 @@ const MyPosts = (props: MyPostsType) => {
          </div>
       </div>
    );
-};
+})
 
 type AddNewPostFormType = {
    handleSubmit: any;
