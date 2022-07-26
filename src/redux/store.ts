@@ -3,12 +3,12 @@ import {dialogsReducer, sendMessageAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {
    follow,
-   followSucces,
+   followSuccess,
    setCurrentPage,
    setTotalUsersCount,
    setUsers,
    toggleIsFetching,
-   unfollow, unfollowSucces
+   unfollow, unfollowSuccess
 } from "./userReducer";
 
 export type PostsType = {
@@ -50,8 +50,8 @@ export type StoreType = {
 export type ActionsTypes = ReturnType<typeof addPostAC> |
    ReturnType<typeof sendMessageAC> |
    ReturnType<typeof setUserProfileAC> |
-   ReturnType<typeof followSucces> |
-   ReturnType<typeof unfollowSucces> |
+   ReturnType<typeof followSuccess> |
+   ReturnType<typeof unfollowSuccess> |
    ReturnType<typeof setUsers> |
    ReturnType<typeof setCurrentPage> |
    ReturnType<typeof setTotalUsersCount> |

@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {getAuthUserDataAC} from "./authReducer";
 
-export const SET_INITIALIZED_SUCCESS = "SET-INITIALIZED-SUCCESS"
+const SET_INITIALIZED_SUCCESS = "SET-INITIALIZED-SUCCESS"
 
 export type initialStateType = {
    initialized: boolean
@@ -30,7 +30,7 @@ export const inititalizedSucces = () => ({type: SET_INITIALIZED_SUCCESS} as cons
 
 export const initializeApp = () => (dispatch: Dispatch) => {
    // @ts-ignore
-   let promise = dispatch(getAuthUserDataAC())
+   const promise = dispatch(getAuthUserDataAC())
    Promise.all([promise])
       .then(() => {
          dispatch(inititalizedSucces())
