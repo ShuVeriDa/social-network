@@ -45,7 +45,7 @@ const AddNewPostForm = (props: AddNewPostFormType) => {
             <Field name='newPostText'
                    component={TextArea}
                    validate={[required, maxLength10]}
-                   placeHolder={"Post message"}/>
+                   placeholder={"Post message"}/>
          </div>
          <div>
             <button>AddPost</button>

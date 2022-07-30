@@ -2,9 +2,7 @@ import React, {ComponentType} from 'react';
 import './App.css';
 import {NavBar} from "./Components/NavBar/NavBar";
 import {Routes, Route, useParams} from "react-router-dom";
-import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
-import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
 import {initializeApp} from "./redux/appReducer";
@@ -25,6 +23,9 @@ export type MapDispatchToPropsType = {}
 
 type AppPropsType = MapStateToPropsType & MapDispatchToPropsType & AppType
 
+const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'))
+const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'))
+
 class App extends React.Component<AppPropsType> {
    componentDidMount() {
       this.props.initializeApp()
@@ -40,13 +41,16 @@ class App extends React.Component<AppPropsType> {
             <HeaderContainer/>
             <NavBar/>
             <div className='app-wrapper-content'>
-               <Routes>
-                  <Route path='/profile/:userId' element={<ProfileContainer/>}/>
-                  <Route path='/profile' element={<ProfileContainer/>}/>
-                  <Route path="/dialogs" element={<DialogsContainer/>}/>
-                  <Route path="/users" element={<UsersContainer/>}/>
-                  <Route path="/login" element={<Login/>}/>
-               </Routes>
+               <React.Suspense fallback={<div><Preloader /></div>}>
+                  <Routes>
+                     <Route path='/profile/:userId' element={<ProfileContainer/>}/>
+                     <Route path='/profile' element={<ProfileContainer/>}/>
+                     <Route path="/dialogs" element={<DialogsContainer/>}/>
+                     <Route path="/users" element={<UsersContainer/>}/>
+                     <Route path="/login" element={<Login/>}/>
+                  </Routes>
+               </React.Suspense>
+
             </div>
          </div>
       )
