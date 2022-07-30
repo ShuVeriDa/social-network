@@ -27,6 +27,7 @@ export const Users = (
                     totalUsersCount={totalUsersCount}
                     currentPage={currentPage}
                     onPageChanged={onPageChanged}
+                    portionSize={10}
          />
          {
             users.map((u: UserType) => <User key={u.id}
