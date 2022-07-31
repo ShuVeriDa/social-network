@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/patientway/static/css/main.0f3e5d11.css",
-    "main.js": "/patientway/static/js/main.f7a38fb2.js",
+    "main.js": "/patientway/static/js/main.d6616a13.js",
     "static/css/386.7864fd47.chunk.css": "/patientway/static/css/386.7864fd47.chunk.css",
     "static/js/386.33a78659.chunk.js": "/patientway/static/js/386.33a78659.chunk.js",
     "static/css/128.21bd3446.chunk.css": "/patientway/static/css/128.21bd3446.chunk.css",
@@ -11,7 +11,7 @@
     "static/media/user.png": "/patientway/static/media/user.6ed69205140e3c9d9232.png",
     "index.html": "/patientway/index.html",
     "main.0f3e5d11.css.map": "/patientway/static/css/main.0f3e5d11.css.map",
-    "main.f7a38fb2.js.map": "/patientway/static/js/main.f7a38fb2.js.map",
+    "main.d6616a13.js.map": "/patientway/static/js/main.d6616a13.js.map",
     "386.7864fd47.chunk.css.map": "/patientway/static/css/386.7864fd47.chunk.css.map",
     "386.33a78659.chunk.js.map": "/patientway/static/js/386.33a78659.chunk.js.map",
     "128.21bd3446.chunk.css.map": "/patientway/static/css/128.21bd3446.chunk.css.map",
@@ -20,6 +20,6 @@
   },
   "entrypoints": [
     "static/css/main.0f3e5d11.css",
-    "static/js/main.f7a38fb2.js"
+    "static/js/main.d6616a13.js"
   ]
 }
