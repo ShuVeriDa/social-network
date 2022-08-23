@@ -27,7 +27,7 @@ export type MessagesDataType = {
 export type ProfilePageType = {
    posts: Array<PostsType>
    newPostText: string
-   profile: null
+   profile: any
 }
 export type DialogsPageType = {
    messages: Array<MessagesDataType>
